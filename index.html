@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree Traversal Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Binary Tree Traversal Visualizer</h1>
+        </header>
+        
+        <div class="controls">
+            <div class="input-group">
+                <label for="levels">Enter number of levels (1-5):</label>
+                <input type="number" id="levels" min="1" max="5" value="3">
+            </div>
+            <div class="button-group">
+                <button id="generateBtn" class="btn">Generate Tree</button>
+                <button id="randomBtn" class="btn">Random Tree</button>
+            </div>
+        </div>
+
+        <div class="visualization">
+            <canvas id="treeCanvas"></canvas>
+        </div>
+
+        <div class="results">
+            <h2>📊 Traversal Results</h2>
+            <div class="traversal-container">
+                <div class="traversal-box">
+                    <h3>🔄 Post-order (LRT)</h3>
+                    <div id="postOrder" class="traversal-result"></div>
+                </div>
+                <div class="traversal-box">
+                    <h3>⬇️ Pre-order (TLR)</h3>
+                    <div id="preOrder" class="traversal-result"></div>
+                </div>
+                <div class="traversal-box">
+                    <h3>➡️ In-order (LTR)</h3>
+                    <div id="inOrder" class="traversal-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
