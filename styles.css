@@ -1,18 +1,57 @@
+/* Root CSS Variables - Light Theme */
 :root {
-    --primary-color: #4CAF50;
-    --primary-dark: #388E3C;
-    --primary-light: #81C784;
-    --secondary-color: #2196F3;
-    --bg-light: #ffffff;
-    --bg-gray: #f5f5f5;
-    --bg-gray-dark: #e0e0e0;
-    --text-dark: #333333;
-    --text-gray: #666666;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --border-radius: 8px;
+    /* Color variables */
+    --primary-color: #6C5CE7;
+    --primary-dark: #5D4ED6;
+    --primary-light: #8F85FF;
+    --secondary-color: #93D7BE;
+    --bg-color: #E8ECF3;
+    --frame-color: #FFFFFF;
+    --text-color: #1A202C;
+    --button-color: #6C5CE7;
+    --button-hover: #5D4ED6;
+    --accent-color: #93D7BE;
+    --border-color: #E2E8F0;
+    --shadow-color: rgba(108, 92, 231, 0.2);
+    
+    /* Spacing variables */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    
+    /* Border styling */
+    --border-width: 3px;
+    --border-radius: 12px;
+    --border-radius-sm: 10px;
+    --border-radius-lg: 20px;
+    
+    /* Shadow effects */
+    --shadow-main: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 6px 15px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
+    --shadow-raised: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    
+    /* Transitions */
+    --transition-main: all 0.3s ease;
 }
 
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --bg-color: #0F172A;
+    --frame-color: #1E293B;
+    --text-color: #F8FAFC;
+    --button-color: #6366F1;
+    --button-hover: #4F46E5;
+    --accent-color: #475569;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-main: 0 8px 20px var(--shadow-color);
+    --shadow-inner: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+/* Global Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -21,183 +60,285 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-gray);
-    color: var(--text-dark);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
 }
 
 .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
 }
 
+/* Header Styling */
 header {
-    background-color: var(--bg-light);
-    padding: 2rem;
-    margin-bottom: 2rem;
+    background-color: var(--frame-color);
+    margin-bottom: var(--spacing-xl);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-raised);
     text-align: center;
+    border: var(--border-width) solid var(--border-color);
 }
 
 h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+    font-size: min(2.5rem, 5vw);
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-color), var(--button-hover));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
+/* Controls Section */
 .controls {
-    background-color: var(--bg-light);
-    padding: 24px;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
     border-radius: var(--border-radius);
-    margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--bg-gray-dark);
+    gap: var(--spacing-lg);
+    background: var(--bg-color);
+    box-shadow: var(--shadow-inner);
 }
 
 .input-group {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+    background: var(--frame-color);
+    box-shadow: var(--shadow-raised);
+    min-width: 280px;
 }
 
 .input-group label {
-    font-weight: 500;
-    color: var(--text-gray);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.95em;
 }
 
 input[type="number"] {
     width: 80px;
     height: 40px;
-    padding: 8px 12px;
-    border: 2px solid var(--bg-gray-dark);
-    border-radius: var(--border-radius);
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    font-size: 16px;
-    transition: border-color 0.2s ease;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--frame-color);
+    color: var(--text-color);
+    font-size: 0.95em;
+    transition: var(--transition-main);
+    box-shadow: var(--shadow-inner);
 }
 
 input[type="number"]:focus {
     outline: none;
-    border-color: var(--primary-light);
+    border-color: var(--button-color);
+    box-shadow: 0 0 0 2px var(--shadow-color);
 }
 
 .button-group {
     display: flex;
-    gap: 12px;
+    gap: var(--spacing-md);
+    flex-shrink: 0;
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    min-width: 140px;
+    height: 40px;
     border: none;
-    border-radius: var(--border-radius);
-    background-color: var(--primary-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--button-color);
     color: white;
-    font-size: 1rem;
+    font-size: 0.95em;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition-main);
+    box-shadow: var(--shadow-raised);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn:hover {
-    background-color: var(--primary-dark);
+    background-color: var(--button-hover);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var (--shadow-hover);
 }
 
 .btn:active {
     transform: translateY(0);
 }
 
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    justify-content: center;
+    align-items: stretch;
+    min-height: 600px;
+}
+
+/* Visualization Section */
 .visualization {
-    background-color: var(--bg-light);
+    background-color: var(--frame-color);
     border-radius: var(--border-radius);
-    margin-bottom: 2rem;
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    padding: 2rem;
+    box-shadow: var(--shadow-raised);
+    padding: var(--spacing-xl);
+    border: var(--border-width) solid var(--border-color);
+    flex: 2;  /* Changed from 1 to 2 to make it larger */
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 canvas {
     width: 100%;
     height: 500px;
     display: block;
-    background-color: var(--bg-light);
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-inner);
 }
 
+/* Dark Theme controls adjustment */
+[data-theme="dark"] .controls {
+    background-color: var(--bg-color);
+}
+
+[data-theme="dark"] .input-group {
+    background-color: var(--frame-color);
+}
+
+/* Results Section */
 .results {
-    background-color: var(--bg-light);
-    padding: 24px;
+    background-color: var(--frame-color);
+    padding: var(--spacing-xl);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--bg-gray-dark);
+    box-shadow: var(--shadow-raised);
+    border: var(--border-width) solid var(--border-color);
+    flex: 1;
+    max-width: 400px;  /* Reduced from 600px to make it smaller */
+    height: 600px;
+    overflow-y: auto;
+    position: relative;
 }
 
 .results h2 {
-    font-size: 24px;
-    margin-bottom: 24px;
-    color: var(--primary-dark);
-    font-weight: 600;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--button-hover));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: -8px;
+    margin-bottom: var(--spacing-md);
 }
 
 .traversal-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
 }
 
 .traversal-box {
-    background-color: var(--bg-gray);
-    padding: 20px;
+    background-color: var(--frame-color);
+    padding: var(--spacing-lg);
     border-radius: var(--border-radius);
-    border: 1px solid var(--bg-gray-dark);
-    transition: transform 0.2s ease;
+    border: var(--border-width) solid var(--border-color);
+    transition: var(--transition-main);
+    box-shadow: var(--shadow-raised);
 }
 
 .traversal-box:hover {
     transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .traversal-box h3 {
-    font-size: 18px;
-    margin-bottom: 12px;
-    color: var(--primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .traversal-result {
     font-family: 'Cascadia Code', 'Consolas', monospace;
-    padding: 16px;
-    background-color: var(--bg-light);
-    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-sm);
     min-height: 48px;
-    word-break: break-all;
-    border: 1px solid var(--bg-gray-dark);
-    color: var(--text-gray);
+    border: var(--border-width) solid var(--border-color);
+    color: var(--text-color);
+    box-shadow: var(--shadow-inner);
+    font-size: 0.9em;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: var(--button-color) var(--frame-color);
 }
 
+/* Scrollbar Styling */
+.traversal-result::-webkit-scrollbar {
+    height: 6px;
+}
+
+.traversal-result::-webkit-scrollbar-track {
+    background: var(--frame-color);
+    border-radius: 3px;
+}
+
+.traversal-result::-webkit-scrollbar-thumb {
+    background-color: var(--button-color);
+    border-radius: 3px;
+}
+
+/* Dark Theme Specific Styles */
+[data-theme="dark"] .traversal-box {
+    background-color: var(--frame-color);
+}
+
+[data-theme="dark"] .traversal-result {
+    background-color: var(--bg-color);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 16px;
+        padding: var(--spacing-md);
     }
     
     .controls {
         flex-direction: column;
         align-items: stretch;
-        padding: 20px;
+        padding: var(--spacing-lg);
     }
     
     .input-group {
         flex-direction: column;
         align-items: stretch;
+        min-width: 100%;
+        padding: var(--spacing-md);
     }
     
     input[type="number"] {
@@ -208,11 +349,68 @@ canvas {
         flex-direction: column;
     }
     
-    .traversal-container {
-        grid-template-columns: 1fr;
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .results {
+        width: 100%;
+        max-width: 100%;
     }
     
     .btn {
         width: 100%;
+        min-width: 100%;
+        height: 45px;
     }
-} 
+    
+    .visualization {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Theme Toggle Button - Updated */
+.theme-toggle {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border-radius: 12px;
+    background: var(--frame-color);
+    color: var(--text-color);
+    border: 3px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-main);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--button-color);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.theme-toggle .sun {
+    display: none;
+}
+
+.theme-toggle .moon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon {
+    display: none;
+}
