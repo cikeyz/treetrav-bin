@@ -113,11 +113,23 @@ class BinaryTreeVisualizer {
     drawNode(x, y, value) {
         const nodeSize = 20 * this.scale;
 
+        const isDarkTheme = document.body.getAttribute('data-theme') === 'dark';
+        
+        // Colors based on theme
+        const colors = {
+            shadow: isDarkTheme ? '#1E293B' : '#e5e7eb',
+            shadowStroke: isDarkTheme ? '#334155' : '#d1d5db',
+            main: isDarkTheme ? '#6366F1' : '#6C5CE7',
+            mainStroke: isDarkTheme ? '#4F46E5' : '#5D4ED6',
+            highlight: isDarkTheme ? '#818CF8' : '#8F85FF',
+            text: '#FFFFFF'
+        };
+
         // Draw shadow
         this.ctx.beginPath();
         this.ctx.arc(x + 2, y + 2, nodeSize, 0, Math.PI * 2);
-        this.ctx.fillStyle = '#e5e7eb';
-        this.ctx.strokeStyle = '#d1d5db';
+        this.ctx.fillStyle = colors.shadow;
+        this.ctx.strokeStyle = colors.shadowStroke;
         this.ctx.lineWidth = 2;
         this.ctx.fill();
         this.ctx.stroke();
@@ -125,8 +137,8 @@ class BinaryTreeVisualizer {
         // Draw main circle
         this.ctx.beginPath();
         this.ctx.arc(x, y, nodeSize, 0, Math.PI * 2);
-        this.ctx.fillStyle = '#2563eb';
-        this.ctx.strokeStyle = '#1d4ed8';
+        this.ctx.fillStyle = colors.main;
+        this.ctx.strokeStyle = colors.mainStroke;
         this.ctx.lineWidth = 2;
         this.ctx.fill();
         this.ctx.stroke();
@@ -134,12 +146,12 @@ class BinaryTreeVisualizer {
         // Draw highlight
         this.ctx.beginPath();
         this.ctx.arc(x, y, nodeSize - 2, 0, Math.PI * 2);
-        this.ctx.strokeStyle = '#60a5fa';
+        this.ctx.strokeStyle = colors.highlight;
         this.ctx.lineWidth = 1;
         this.ctx.stroke();
 
         // Draw text
-        this.ctx.fillStyle = 'white';
+        this.ctx.fillStyle = colors.text;
         this.ctx.font = `${Math.max(12 * this.scale, 12)}px Segoe UI`;
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
@@ -147,11 +159,18 @@ class BinaryTreeVisualizer {
     }
 
     drawConnection(startX, startY, endX, endY) {
+        const isDarkTheme = document.body.getAttribute('data-theme') === 'dark';
+        
+        const colors = {
+            shadow: isDarkTheme ? '#1E293B' : '#e5e7eb',
+            main: isDarkTheme ? '#6366F1' : '#6C5CE7'
+        };
+
         // Draw shadow
         this.ctx.beginPath();
         this.ctx.moveTo(startX, startY);
         this.ctx.lineTo(endX, endY);
-        this.ctx.strokeStyle = '#e5e7eb';
+        this.ctx.strokeStyle = colors.shadow;
         this.ctx.lineWidth = 4;
         this.ctx.stroke();
 
@@ -159,7 +178,7 @@ class BinaryTreeVisualizer {
         this.ctx.beginPath();
         this.ctx.moveTo(startX, startY);
         this.ctx.lineTo(endX, endY);
-        this.ctx.strokeStyle = '#2563eb';
+        this.ctx.strokeStyle = colors.main;
         this.ctx.lineWidth = 2;
         this.ctx.stroke();
     }
@@ -268,5 +287,19 @@ class BinaryTreeVisualizer {
 
 // Initialize the visualizer when the page loads
 window.addEventListener('load', () => {
-    new BinaryTreeVisualizer();
-}); 
+    const visualizer = new BinaryTreeVisualizer();
+    
+    // Redraw tree when theme changes
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+        if (visualizer.currentTree) {
+            visualizer.drawTree();
+        }
+    });
+    
+    // Watch for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(() => {
+        if (visualizer.currentTree) {
+            visualizer.drawTree();
+        }
+    });
+});
